@@ -1,0 +1,503 @@
+@reference "./tailwind.css";
+@import './touched-files.css';
+
+body {
+	tab-size: 2ch;
+}
+
+.clip-path-button-outer {
+	clip-path: polygon(0 0, 100% 0, 100% 70%, 88% 100%, 0 100%);
+}
+
+.clip-path-button {
+	clip-path: polygon(0 0, 100% 0, 100% 70%, 88.5% 100%, 0 100%);
+}
+
+.shadow-on-scrollbox {
+	background:
+		linear-gradient(hsl(var(--background)) 30%, hsl(var(--foreground) / 0)),
+		radial-gradient(
+				farthest-side at 50% 0,
+				hsl(var(--foreground) / 0.2),
+				hsl(var(--foreground) / 0)
+			)
+			0 0,
+		linear-gradient(hsl(var(--foreground) / 0), hsl(var(--background)) 70%) 0
+			100%,
+		radial-gradient(
+				farthest-side at 50% 100%,
+				hsl(var(--foreground) / 0.2),
+				hsl(var(--foreground) / 0)
+			)
+			0 100%;
+	background-repeat: no-repeat;
+	background-color: hsl(var(--background));
+	background-size:
+		100% 40px,
+		100% 14px,
+		100% 40px,
+		100% 14px;
+	background-attachment: local, scroll, local, local;
+}
+
+.orientation-sideways {
+	text-orientation: sideways;
+	writing-mode: vertical-rl;
+	@apply rotate-180;
+}
+
+.display-alt-down {
+	display: none;
+}
+
+.alt-down .display-alt-down {
+	display: inherit;
+}
+
+.alt-down .display-alt-up {
+	display: none;
+}
+
+/* code syntax highlighting */
+/* dark is default: */
+:root {
+	--base00: #121318; /* editor background */
+	--base01: #2d2d2d; /* unused (currently) */
+	--base02: #424242; /* unused (currently) */
+	--base03: #637777; /* code comments */
+	--base04: #555555; /* unused (currently) */
+	--base05: #d6deeb; /* fallback font color */
+	--base06: #c8c8c8; /* unused (currently) */
+	--base07: #fafafa; /* unused (currently) */
+	--base08: #7fdbca; /* variable references */
+	--base09: #f78c6c; /* numbers */
+	--base0A: #c792ea; /* keywords */
+	--base0B: #ecc48d; /* strings */
+	--base0C: #f78c6c; /* escape characters in strings */
+	--base0D: #82aaff; /* function calls */
+	--base0E: #c792ea; /* operators */
+	--base0F: #d3423e; /* "Embedded" (whatever that means) */
+
+	--highlight-added: #7fdbca;
+	--highlight-added-selection: #7fdbca47;
+	--highlight-removed: #d3423e;
+	--highlight-removed-selection: #d3433e57;
+}
+
+:root .light,
+:root.light {
+	--base00: #f3f3f3; /* editor background */
+	--base01: #e0e0e0; /* unused (currently) */
+	--base02: #d6d6d6; /* unused (currently) */
+	--base03: #989fb1; /* code comments */
+	--base04: #969896; /* unused (currently) */
+	--base05: #2e3039; /* fallback font color */
+	--base06: #282a2e; /* unused (currently) */
+	--base07: #1d1f21; /* unused (currently) */
+	--base08: #0c969b; /* variable references */
+	--base09: #aa0982; /* numbers */
+	--base0A: #994cc3; /* keywords */
+	--base0B: #c96765; /* strings */
+	--base0C: #aa0982; /* escape characters in strings */
+	--base0D: #4876d6; /* function calls */
+	--base0E: #994cc3; /* operators */
+	--base0F: #d3423e; /* "Embedded" (whatever that means) */
+
+	--highlight-added: #0c969b;
+	--highlight-added-selection: #7fdbca4a;
+	--highlight-removed: #d3423e;
+	--highlight-removed-selection: #d3433e24;
+}
+
+/*
+* This un-sets some styles in tailwind/typography for when I really don't want
+* list items to display like list items. (Like for the list of translations)
+*/
+.prose ul.list-none > li {
+	padding-left: unset;
+}
+.prose ul.list-none > li::before {
+	content: unset;
+}
+
+.dark .prose ol > li::before,
+.dark .prose ul > li::before {
+	color: var(--color-gray-300);
+}
+
+/* I think this is a bug in the tailwind/typography thing */
+.dark .dark\:prose-dark thead {
+	color: var(--color-slate-500);
+}
+
+.prose pre[data-line-numbers='true'],
+.prose pre[data-add],
+.prose pre[data-remove],
+.prose pre:has([data-highlight]) {
+	padding-left: 0rem;
+	padding-right: 0rem;
+}
+
+/**
+ keep it in separate css rule
+ has() is not supported in all browsers as of 2023-06-30
+*/
+.prose pre:not([data-line-numbers='true']):has([data-highlight]) {
+	padding-left: 0rem;
+	padding-right: 0rem;
+}
+
+.prose pre:not([data-line-numbers='true']) .codeblock-line:before,
+.prose pre[data-line-numbers='true'] .codeblock-line:before,
+.prose pre[data-remove] .codeblock-line:before,
+.prose pre[data-remove] .codeblock-line:before,
+.prose pre[data-add] .codeblock-line:before,
+.prose pre[data-add] .codeblock-line:before {
+	padding-left: 0rem;
+	text-align: right;
+	display: inline-block;
+	width: 4rem;
+	color: var(--base03);
+	padding-right: 1.5rem;
+	position: sticky;
+	left: 0;
+	background-color: var(--base00);
+	content: attr(data-line-number);
+}
+
+.prose pre .codeblock-line[data-diff-line-number]:before {
+	content: attr(data-diff-line-number);
+}
+
+/* make this more specific than above */
+.prose
+	pre[data-line-numbers='false'][data-line-numbers='false']
+	.codeblock-line:before {
+	content: ' ';
+}
+
+.prose
+	pre[data-line-numbers='false']:not([data-add]):not([data-remove]):not(
+		:has([data-highlight])
+	)
+	.codeblock-line:before {
+	width: 0;
+	padding-right: 0;
+}
+
+.prose
+	pre[data-line-numbers='false']:not([data-add]):not([data-remove]):has(
+		[data-highlight]
+	)
+	.codeblock-line:before {
+	width: 2rem;
+}
+
+.prose pre[data-filename] {
+	padding-top: 2rem;
+}
+
+.prose pre[data-filename][data-buttons][data-fullpath] {
+	padding-top: 3rem;
+}
+
+.prose pre[data-lang]:not([data-nolang]) {
+	padding-bottom: 2rem;
+}
+
+.prose pre:not([data-lang]):not([data-nolang]) {
+	background-color: var(--base00);
+	color: var(--base05);
+}
+
+.prose
+	pre[data-line-numbers='true']
+	[data-line-number]:before
+	.codeblock-line[data-highlight='true']:before {
+	background: var(--base0E);
+}
+
+.prose *:not(pre) code {
+	background: var(--base00);
+	color: var(--base05);
+	padding: 0.2rem 0.4rem;
+	border-radius: 0.2rem;
+}
+
+.prose
+	pre[data-add]:not([data-line-numbers='true'])
+	[data-diff-line-number]:before,
+.prose
+	pre[data-remove]:not([data-line-numbers='true'])
+	[data-diff-line-number]:before {
+	content: attr(data-diff-line-number);
+}
+
+.prose pre > code {
+	display: inline-block;
+	min-width: 100%;
+}
+
+.codeblock-line {
+	display: block;
+	position: relative;
+	padding-right: 1rem;
+}
+
+.codeblock-line[data-highlight='true']:after,
+.prose pre[data-remove] .codeblock-line[data-remove]:after,
+.prose pre[data-add] .codeblock-line[data-add]:after {
+	content: ' ';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	opacity: 0.15;
+	pointer-events: none;
+}
+
+.codeblock-line[data-highlight='true']:before {
+	border-left: 6px solid var(--base0E);
+}
+
+.codeblock-line[data-highlight='true']:after {
+	background: var(--base0E);
+}
+
+/* extra attributes are to make it more specific, otherwise the line number would show up */
+.prose
+	pre[data-remove][data-remove][data-remove]
+	.codeblock-line[data-remove]:before {
+	content: '-';
+}
+
+.prose pre[data-remove] .codeblock-line[data-remove]:after {
+	background: var(--highlight-removed);
+}
+
+/* extra attributes are to make it more specific, otherwise the line number would show up */
+.prose pre[data-add][data-add][data-add] .codeblock-line[data-add]:before {
+	content: '+';
+}
+
+.prose pre[data-add] .codeblock-line[data-add]:after {
+	background: var(--highlight-added);
+}
+
+.prose pre[data-add] .codeblock-line[data-add]::selection,
+.prose pre[data-add] .codeblock-line[data-add] span::selection {
+	background: var(--highlight-added-selection);
+}
+
+.prose pre[data-remove] .codeblock-line[data-remove]::selection,
+.prose pre[data-remove] .codeblock-line[data-remove] span::selection {
+	background: var(--highlight-removed-selection);
+}
+
+.prose pre {
+	position: relative;
+}
+
+.prose pre[data-filename]:before {
+	content: attr(data-filename);
+	position: absolute;
+	left: 8px;
+	top: 4px;
+	font-size: 0.7rem;
+	opacity: 0.7;
+}
+
+.prose pre[data-lang]:not([data-nolang]):after {
+	content: attr(data-lang);
+	position: sticky;
+	right: 0;
+	font-size: 0.7rem;
+	opacity: 0.7;
+	display: inline-block;
+	transform: translate(-16px, 24px);
+	text-align: right;
+	width: 200px;
+	margin-left: -200px;
+}
+
+.prose > * {
+	margin-bottom: 1rem;
+}
+
+.prose callout-muted a,
+.prose callout-info a,
+.prose callout-warning a,
+.prose callout-danger a,
+.prose callout-success a {
+	text-decoration: underline;
+}
+
+.prose callout-muted p,
+.prose callout-info p,
+.prose callout-warning p,
+.prose callout-danger p,
+.prose callout-success p {
+	margin-bottom: 0;
+}
+
+.prose callout-muted,
+.prose callout-info,
+.prose callout-warning,
+.prose callout-danger,
+.prose callout-success {
+	margin-top: 0;
+	margin-bottom: 2rem;
+}
+
+.prose callout-muted,
+.prose callout-info,
+.prose callout-warning,
+.prose callout-danger,
+.prose callout-success {
+	display: block;
+	border-left: solid 4px;
+	padding: 0.5rem 1rem;
+	position: relative;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+}
+
+.prose callout-muted,
+.prose callout-info,
+.prose callout-warning,
+.prose callout-danger,
+.prose callout-success,
+.prose callout-muted *,
+.prose callout-info *,
+.prose callout-warning *,
+.prose callout-danger *,
+.prose callout-success * {
+	font-size: 1rem;
+}
+
+.prose callout-muted.aside,
+.prose callout-info.aside,
+.prose callout-warning.aside,
+.prose callout-danger.aside,
+.prose callout-success.aside,
+.prose callout-muted.aside *,
+.prose callout-info.aside *,
+.prose callout-warning.aside *,
+.prose callout-danger.aside *,
+.prose callout-success.aside * {
+	font-size: 0.875rem;
+}
+
+.prose callout-muted.important,
+.prose callout-info.important,
+.prose callout-warning.important,
+.prose callout-danger.important,
+.prose callout-success.important,
+.prose callout-muted.important *,
+.prose callout-info.important *,
+.prose callout-warning.important *,
+.prose callout-danger.important *,
+.prose callout-success.important * {
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+
+.prose callout-muted:before,
+.prose callout-info:before,
+.prose callout-warning:before,
+.prose callout-danger:before,
+.prose callout-success:before {
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+	content: '';
+	position: absolute;
+	inset: 0;
+	opacity: 0.1;
+	pointer-events: none;
+}
+
+/* the warning yellow is really inaccessible in light mode, so we have a special case for light mode */
+.light .prose callout-warning,
+.light .prose callout-warning ol > li:before {
+	color: #676000;
+}
+.light .prose callout-warning:before {
+	background: #ffd800;
+}
+.prose callout-warning,
+.prose callout-warning ol > li:before {
+	color: #ffd644;
+}
+.prose callout-warning:before {
+	background: #ffd644;
+}
+
+/* the muted gray is really inaccessible in light mode, so we have a special case for light mode */
+.light .prose callout-muted,
+.light .prose callout-muted ol > li:before {
+	color: #4c4b5e;
+}
+.light .prose callout-muted:before {
+	background: #3c3e4d;
+}
+
+.prose callout-muted,
+.prose callout-muted ol > li:before {
+	color: #b9b9c3;
+}
+.prose callout-muted:before {
+	background: #3c3e4d;
+}
+
+.prose callout-info,
+.prose callout-info ol > li:before {
+	color: #4b96ff;
+}
+.prose callout-info:before {
+	background: #4b96ff;
+}
+
+.prose callout-danger,
+.prose callout-danger ol > li:before {
+	color: #ff4545;
+}
+.prose callout-danger:before {
+	background: #ff4545;
+}
+
+.prose callout-success,
+.prose callout-success ol > li:before {
+	color: #30c85e;
+}
+.prose callout-success:before {
+	background: #30c85e;
+}
+
+.prose callout-warning.notification .title,
+.prose callout-danger.notification .title {
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
+
+.prose callout-danger.notification pre {
+	border: 4px solid #ff4545;
+	padding-block: 1.5rem;
+	margin-block: 0.5rem;
+}
+
+.prose callout-warning.notification,
+.prose callout-danger.notification {
+	margin-bottom: 0 !important;
+}
+
+/* For Firefox tests: https://github.com/epicweb-dev/epicshop/pull/228#pullrequestreview-2363921488 */
+.radix-state-closed\:hidden[data-state='closed'] {
+	height: 0;
+	overflow: hidden;
+	display: flex;
+}
+
+/* until https://github.com/mermaid-js/mermaid/pull/6261 gets merged. Keep background on theme. */
+.mermaid {
+	background-color: hsl(var(--background));
+}

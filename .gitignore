@@ -1,0 +1,36 @@
+node_modules
+
+/tmp
+/publish
+workspace/
+**/.cache/
+**/build/
+**/public/build
+**/prisma/data.db
+scripts/db.json
+.tshy
+.tshy-build
+
+# in a real app you'd want to not commit the .env
+# file as well, but since this is for a workshop
+# we're going to keep them around.
+# .env
+/test-results/
+/playwright-report/
+/playwright/.cache/
+.partykit
+**/dist/
+vite.config.ts.timestamp-*
+
+.nx/cache
+.nx/workspace-data
+*.tsbuildinfo
+
+/example/playgrounds
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
+
+.env
+nanobot/*.db
+/other/update-workshops/temp-workshops
+saved-playgrounds

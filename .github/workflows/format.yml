@@ -1,0 +1,63 @@
+name: Auto Format
+on:
+  workflow_run:
+    workflows: ['validate']
+    types:
+      - completed
+    branches: ['main']
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    name: 🧹 Auto Format
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Only run if the validate workflow completed successfully and was triggered by a push to main
+    if:
+      ${{ github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' }}
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: 📥 Download deps
+        run: npm install --prefer-offline --no-audit --no-fund
+
+      - name: 🔧 Configure git
+        run: |
+          git config --global user.email "me+bot@kentcdodds.com"
+          git config --global user.name "Kody 🐨"
+
+      - name: 🎨 Run Prettier
+        run:
+          npx prettier --write "**/*.{js,jsx,ts,tsx,md,css}" --ignore-path
+          .prettierignore
+
+      - name: 🔍 Run ESLint --fix
+        run: npm run lint -- --fix
+
+      - name: 💾 Commit changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "chore: cleanup 🧹"
+            git push
+            echo "Changes committed and pushed."
+          else
+            echo "No changes to commit."
+          fi

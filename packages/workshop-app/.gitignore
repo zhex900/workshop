@@ -1,0 +1,10 @@
+node_modules
+
+/build
+/public/build
+/server-build
+
+/prisma/data.db
+/prisma/data.db-journal
+
+.react-router/

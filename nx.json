@@ -1,0 +1,49 @@
+{
+	"$schema": "./node_modules/nx/schemas/nx-schema.json",
+	"tui": {
+		"autoExit": 0
+	},
+	"targetDefaults": {
+		"nx-release-publish": {
+			"options": {
+				"packageRoot": "publish/{projectRoot}"
+			}
+		},
+		"build": {
+			"cache": true,
+			"dependsOn": ["^build"]
+		},
+		"lint": {
+			"cache": true
+		},
+		"typecheck": {
+			"cache": true,
+			"dependsOn": ["^build"]
+		},
+		"test": {
+			"cache": true,
+			"dependsOn": ["^build"]
+		}
+	},
+	"release": {
+		"projects": [
+			"@epic-web/workshop-app",
+			"epicshop",
+			"@epic-web/workshop-mcp",
+			"@epic-web/workshop-utils",
+			"@epic-web/workshop-presence"
+		],
+		"version": {
+			"conventionalCommits": true,
+			"preserveLocalDependencyProtocols": false,
+			"manifestRootsToUpdate": ["publish/{projectRoot}"]
+		},
+		"changelog": {
+			"workspaceChangelog": {
+				"file": false,
+				"createRelease": "github"
+			}
+		}
+	},
+	"nxCloudAccessToken": "ODZlMTQ4OWEtOTk2OS00NzkyLWI2Y2UtOTM2MDNkMmJkNjBkfHJlYWQ="
+}

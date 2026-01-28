@@ -1,0 +1,261 @@
+{
+  "name": "@epic-web/workshop-utils",
+  "version": "0.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "zshy": {
+    "cjs": false,
+    "conditions": {
+      "import": "esm"
+    },
+    "exports": {
+      "./package.json": "./package.json",
+      "./apps.server": "./src/apps.server.ts",
+      "./diff.server": "./src/diff.server.ts",
+      "./env.server": "./src/env.server.ts",
+      "./epic-api.server": "./src/epic-api.server.ts",
+      "./user.server": "./src/user.server.ts",
+      "./cache.server": "./src/cache.server.ts",
+      "./config.server": "./src/config.server.ts",
+      "./db.server": "./src/db.server.ts",
+      "./data-storage.server": "./src/data-storage.server.ts",
+      "./launch-editor.server": "./src/launch-editor.server.ts",
+      "./timing.server": "./src/timing.server.ts",
+      "./modified-time.server": "./src/modified-time.server.ts",
+      "./compile-mdx.server": "./src/compile-mdx.server.ts",
+      "./git.server": "./src/git.server.ts",
+      "./iframe-sync": "./src/iframe-sync.tsx",
+      "./init-env": "./src/init-env.ts",
+      "./logger": "./src/logger.ts",
+      "./playwright.server": "./src/playwright.server.ts",
+      "./notifications.server": "./src/notifications.server.ts",
+      "./offline-videos.server": "./src/offline-videos.server.ts",
+      "./offline-video-utils": "./src/offline-video-utils.ts",
+      "./process-manager.server": "./src/process-manager.server.ts",
+      "./test": "./src/test.ts",
+      "./request-context.server": "./src/request-context.server.ts",
+      "./utils.server": "./src/utils.server.ts",
+      "./utils": "./src/utils.ts",
+      "./workshops.server": "./src/workshops.server.ts"
+    }
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./apps.server": {
+      "import": "./dist/apps.server.js",
+      "types": "./dist/apps.server.d.ts",
+      "default": "./dist/apps.server.js"
+    },
+    "./diff.server": {
+      "import": "./dist/diff.server.js",
+      "types": "./dist/diff.server.d.ts",
+      "default": "./dist/diff.server.js"
+    },
+    "./env.server": {
+      "import": "./dist/env.server.js",
+      "types": "./dist/env.server.d.ts",
+      "default": "./dist/env.server.js"
+    },
+    "./epic-api.server": {
+      "import": "./dist/epic-api.server.js",
+      "types": "./dist/epic-api.server.d.ts",
+      "default": "./dist/epic-api.server.js"
+    },
+    "./user.server": {
+      "import": "./dist/user.server.js",
+      "types": "./dist/user.server.d.ts",
+      "default": "./dist/user.server.js"
+    },
+    "./cache.server": {
+      "import": "./dist/cache.server.js",
+      "types": "./dist/cache.server.d.ts",
+      "default": "./dist/cache.server.js"
+    },
+    "./config.server": {
+      "import": "./dist/config.server.js",
+      "types": "./dist/config.server.d.ts",
+      "default": "./dist/config.server.js"
+    },
+    "./db.server": {
+      "import": "./dist/db.server.js",
+      "types": "./dist/db.server.d.ts",
+      "default": "./dist/db.server.js"
+    },
+    "./data-storage.server": {
+      "import": "./dist/data-storage.server.js",
+      "types": "./dist/data-storage.server.d.ts",
+      "default": "./dist/data-storage.server.js"
+    },
+    "./launch-editor.server": {
+      "import": "./dist/launch-editor.server.js",
+      "types": "./dist/launch-editor.server.d.ts",
+      "default": "./dist/launch-editor.server.js"
+    },
+    "./timing.server": {
+      "import": "./dist/timing.server.js",
+      "types": "./dist/timing.server.d.ts",
+      "default": "./dist/timing.server.js"
+    },
+    "./modified-time.server": {
+      "import": "./dist/modified-time.server.js",
+      "types": "./dist/modified-time.server.d.ts",
+      "default": "./dist/modified-time.server.js"
+    },
+    "./compile-mdx.server": {
+      "import": "./dist/compile-mdx.server.js",
+      "types": "./dist/compile-mdx.server.d.ts",
+      "default": "./dist/compile-mdx.server.js"
+    },
+    "./git.server": {
+      "import": "./dist/git.server.js",
+      "types": "./dist/git.server.d.ts",
+      "default": "./dist/git.server.js"
+    },
+    "./iframe-sync": {
+      "import": "./dist/iframe-sync.js",
+      "types": "./dist/iframe-sync.d.ts",
+      "default": "./dist/iframe-sync.js"
+    },
+    "./init-env": {
+      "import": "./dist/init-env.js",
+      "types": "./dist/init-env.d.ts",
+      "default": "./dist/init-env.js"
+    },
+    "./logger": {
+      "import": "./dist/logger.js",
+      "types": "./dist/logger.d.ts",
+      "default": "./dist/logger.js"
+    },
+    "./playwright.server": {
+      "import": "./dist/playwright.server.js",
+      "types": "./dist/playwright.server.d.ts",
+      "default": "./dist/playwright.server.js"
+    },
+    "./notifications.server": {
+      "import": "./dist/notifications.server.js",
+      "types": "./dist/notifications.server.d.ts",
+      "default": "./dist/notifications.server.js"
+    },
+    "./offline-videos.server": {
+      "import": "./dist/offline-videos.server.js",
+      "types": "./dist/offline-videos.server.d.ts",
+      "default": "./dist/offline-videos.server.js"
+    },
+    "./offline-video-utils": {
+      "import": "./dist/offline-video-utils.js",
+      "types": "./dist/offline-video-utils.d.ts",
+      "default": "./dist/offline-video-utils.js"
+    },
+    "./process-manager.server": {
+      "import": "./dist/process-manager.server.js",
+      "types": "./dist/process-manager.server.d.ts",
+      "default": "./dist/process-manager.server.js"
+    },
+    "./test": {
+      "import": "./dist/test.js",
+      "types": "./dist/test.d.ts",
+      "default": "./dist/test.js"
+    },
+    "./request-context.server": {
+      "import": "./dist/request-context.server.js",
+      "types": "./dist/request-context.server.d.ts",
+      "default": "./dist/request-context.server.js"
+    },
+    "./utils.server": {
+      "import": "./dist/utils.server.js",
+      "types": "./dist/utils.server.d.ts",
+      "default": "./dist/utils.server.js"
+    },
+    "./utils": {
+      "import": "./dist/utils.js",
+      "types": "./dist/utils.d.ts",
+      "default": "./dist/utils.js"
+    },
+    "./workshops.server": {
+      "import": "./dist/workshops.server.js",
+      "types": "./dist/workshops.server.d.ts",
+      "default": "./dist/workshops.server.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "build": "zshy",
+    "build:watch": "nx watch --projects=@epic-web/workshop-utils -- nx run \\$NX_PROJECT_NAME:build"
+  },
+  "dependencies": {
+    "@epic-web/cachified": "^5.6.0",
+    "@epic-web/invariant": "^1.0.0",
+    "@epic-web/remember": "^1.1.0",
+    "@kentcdodds/md-temp": "^10.0.1",
+    "@mdx-js/mdx": "^3.1.1",
+    "@playwright/test": "^1.57.0",
+    "@react-router/node": "^7.12.0",
+    "@sentry/react-router": "^10.36.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@total-typescript/ts-reset": "^0.6.1",
+    "@types/chai": "^5.2.3",
+    "@types/chai-dom": "^1.11.3",
+    "@vitest/expect": "^4.0.17",
+    "chai": "^6.2.2",
+    "chai-dom": "^1.12.1",
+    "chalk": "^5.6.2",
+    "chokidar": "^5.0.0",
+    "close-with-grace": "^2.4.0",
+    "cookie": "^1.1.1",
+    "cross-spawn": "^7.0.6",
+    "dayjs": "^1.11.19",
+    "esbuild": "^0.27.2",
+    "execa": "^9.6.1",
+    "find-process": "^2.0.0",
+    "fkill": "^10.0.3",
+    "fs-extra": "^11.3.3",
+    "globby": "^16.1.0",
+    "ignore": "^7.0.5",
+    "json5": "^2.2.3",
+    "lru-cache": "^11.2.4",
+    "lz-string": "^1.5.0",
+    "md5-hex": "^5.0.0",
+    "mdast-util-mdx-jsx": "^3.2.0",
+    "mdx-bundler": "^10.1.1",
+    "p-queue": "^9.1.0",
+    "parse-git-diff": "^0.0.19",
+    "pkgmgr": "^1.1.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-router": "^7.12.0",
+    "rehype": "^13.0.2",
+    "rehype-autolink-headings": "^7.1.0",
+    "remark": "^15.0.1",
+    "remark-emoji": "^5.0.2",
+    "remark-gfm": "^4.0.1",
+    "shell-quote": "^1.8.3",
+    "shiki": "^3.21.0",
+    "unified": "^11.0.5",
+    "unist-util-remove-position": "^5.0.0",
+    "unist-util-visit": "^5.0.0",
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/hast": "^3.0.4",
+    "@types/mdast": "^4.0.4",
+    "@types/node": "^25.0.9",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "@types/shell-quote": "^1.7.5",
+    "vitest": "^4.0.17",
+    "zshy": "^0.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/epicweb-dev/epicshop.git",
+    "directory": "packages/workshop-utils"
+  }
+}

@@ -1,0 +1,45 @@
+name: Update Workshops
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update-workshops:
+    name: 🔄 Update Workshop Repos
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v5
+        with:
+          # Avoid persisting github-actions[bot] credentials in git config.
+          # This workflow pushes to *other* repos using a PAT instead.
+          persist-credentials: false
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: 📥 Download deps
+        run: npm ci --prefer-offline --no-audit --no-fund
+        working-directory: other/update-workshops
+
+      - name: 🔧 Configure git
+        run: |
+          git config --global user.email "me+bot@kentcdodds.com"
+          git config --global user.name "Kody 🐨"
+
+      - name: 🔄 Update workshop repos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKSHOP_UPDATE_TOKEN: ${{ secrets.WORKSHOP_UPDATE_TOKEN }}
+        run: npm start
+        working-directory: other/update-workshops

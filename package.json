@@ -1,0 +1,66 @@
+{
+  "name": "epic-workshop",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cli": "tsx ./packages/workshop-cli/src/cli.ts",
+    "typecheck": "./other/nx-fallback.js run-many --target typecheck",
+    "lint": "./other/nx-fallback.js lint",
+    "build": "./other/nx-fallback.js run-many --target build",
+    "prestart": "npm run build -s",
+    "setup": "npm install && npm run validate",
+    "go": "cross-env NODE_ENV=development EPICSHOP_CONTEXT_CWD=$PWD/packages/example tsx watch $@",
+    "start": "cross-env NODE_ENV=production npm --prefix example run start",
+    "dev": "npm --prefix example run start",
+    "warm": "npm --prefix example run warm",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "./other/nx-fallback.js test:e2e",
+    "format": "./other/nx-fallback.js format:write",
+    "validate": "./other/nx-fallback.js run-many --target build,typecheck,lint,test --parallel"
+  },
+  "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com/)",
+  "license": "GPL-3.0-only",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@epic-web/config": "^1.21.3",
+    "@nx/devkit": "22.3.3",
+    "@nx/eslint": "22.3.3",
+    "@nx/js": "22.3.3",
+    "@nx/playwright": "22.3.3",
+    "@nx/workspace": "22.3.3",
+    "@playwright/test": "^1.57.0",
+    "@types/yargs": "^17.0.35",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.39.2",
+    "execa": "^9.6.1",
+    "get-stream": "^9.0.1",
+    "globby": "^16.1.0",
+    "npm-run-all": "^4.1.5",
+    "nx": "22.3.3",
+    "prettier": "^3.8.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "react-router": "^7.12.0",
+    "tsx": "^4.21.0",
+    "yargs": "^18.0.0",
+    "yoctocolors": "^2.1.2"
+  },
+  "nx": {
+    "includedScripts": []
+  },
+  "devDependencies": {
+    "chromium-bidi": "^13.0.1",
+    "unicorn-magic": "^0.4.0",
+    "vitest": "^4.0.17"
+  },
+  "overrides": {
+    "unicorn-magic": "^0.4.0",
+    "vite": "7.3.1"
+  }
+}
