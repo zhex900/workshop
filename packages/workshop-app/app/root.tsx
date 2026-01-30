@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { getPresentUsers } from '@epic-web/workshop-presence/presence.server'
+// import { getPresentUsers } from '@epic-web/workshop-presence/presence.server'
 import { getApps } from '@epic-web/workshop-utils/apps.server'
 import { getWorkshopConfig } from '@epic-web/workshop-utils/config.server'
 import {
@@ -49,7 +49,7 @@ import { EpicProgress } from './components/progress-bar'
 import { EpicToaster } from './components/toaster'
 import { TooltipProvider } from './components/ui/tooltip'
 import { UpdateToast } from './components/update-repo'
-import { Notifications } from './routes/admin+/notifications'
+// import { Notifications } from './routes/admin+/notifications'
 import { useTheme } from './routes/theme/index'
 import { getTheme } from './routes/theme/theme-session.server'
 import appStylesheetUrl from './styles/app.css?url'
@@ -58,10 +58,11 @@ import { ClientHintCheck, getHints } from './utils/client-hints'
 import { getConfetti } from './utils/confetti.server'
 import { cn, combineHeaders, getDomainUrl, useAltDown } from './utils/misc'
 import { getPracticePastLessonData } from './utils/practice-past-lesson'
-import { Presence } from './utils/presence'
+// import { Presence } from './utils/presence'
 import { getSentryUser } from './utils/sentry-user'
 import { getSeoMetaTags } from './utils/seo'
 import { getToast } from './utils/toast.server'
+import { User } from './utils/presence.tsx'
 
 export const links: LinksFunction = () => {
 	return [
@@ -125,10 +126,11 @@ export async function loader({ request }: Route.LoaderArgs) {
 		offlineVideoPlaybackIds: getOfflineVideoPlaybackIds(),
 	})
 
-	const presentUsers = await getPresentUsers({
-		request,
-		timings,
-	})
+	const presentUsers: User[] = []
+	// await getPresentUsers({
+	// 	request,
+	// 	timings,
+	// })
 
 	// Filter out repoUpdates if muted
 	const mutedNotifications = await getMutedNotifications()
@@ -295,7 +297,7 @@ function App() {
 			<EpicToaster toast={data.toast} />
 			<UpdateToast repoUpdates={data.repoUpdates} />
 			<EpicProgress />
-			<Notifications unmutedNotifications={data.unmutedNotifications} />
+			{/* <Notifications unmutedNotifications={data.unmutedNotifications} /> */}
 			<KeyboardShortcutsDialog
 				open={showKeyboardShortcuts}
 				onOpenChange={setShowKeyboardShortcuts}

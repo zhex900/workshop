@@ -1,6 +1,6 @@
 {
-  "name": "@epic-web/workshop-utils",
-  "version": "0.0.0",
+  "name": "@zhex900/workshop-utils",
+  "version": "0.1.0",
   "publishConfig": {
     "access": "public"
   },
@@ -255,7 +255,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/epicweb-dev/epicshop.git",
+    "url": "https://github.com/zhex900/workshop.git",
     "directory": "packages/workshop-utils"
   }
 }

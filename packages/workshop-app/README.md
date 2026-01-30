@@ -1,6 +1,8 @@
-# @epic-web/workshop-app
+# @zhex900/workshop-app
 
-The **Epic Workshop App** is the React Router v7 web application that powers the
+This is forked from https://github.com/epicweb-dev/epicshop
+
+The **Workshop App** is the React Router v7 web application that powers the
 local workshop experience (exercises, steps, diffs, videos, progress, etc.).
 
 Most users should not interact with this package directly. It is typically
@@ -20,7 +22,7 @@ npm install -g epicshop
   resolution
 
 ```bash
-npm install -g @epic-web/workshop-app
+npm install -g @zhex900/workshop-app
 ```
 
 ## Usage
@@ -35,7 +37,7 @@ If the CLI cannot locate the app, you can point it at a specific
 checkout/install:
 
 ```bash
-epicshop start --app-location /absolute/path/to/@epic-web/workshop-app
+epicshop start --app-location /absolute/path/to/@zhex900/workshop-app
 ```
 
 (or set `EPICSHOP_APP_LOCATION`).
@@ -46,9 +48,9 @@ From the monorepo root:
 
 ```bash
 npm install
-npm run build --workspace=@epic-web/workshop-utils
-npm run build --workspace=@epic-web/workshop-presence
-npm run dev --workspace=@epic-web/workshop-app
+npm run build --workspace=@zhex900/workshop-utils
+npm run build --workspace=@zhex900/workshop-presence
+npm run dev --workspace=@zhex900/workshop-app
 ```
 
 ## Documentation
