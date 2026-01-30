@@ -24,10 +24,11 @@ function useRevalidationWSImpl({ watchPaths }: { watchPaths: Array<string> }) {
 		socketParams.append('watch', path)
 	}
 	const socketQuery = socketParams.toString()
-	const protocol = requestInfo.protocol === 'https:' ? 'wss:' : 'ws:'
-	const host = requestInfo.hostname
-	const port = requestInfo.port
-	const socketPath = `${protocol}//${host}:${port}/__ws?${socketQuery}`
+	const socketUrl = new URL(requestInfo.origin)
+	socketUrl.protocol = requestInfo.protocol === 'https:' ? 'wss:' : 'ws:'
+	socketUrl.pathname = '/__ws'
+	socketUrl.search = socketQuery
+	const socketPath = socketUrl.toString()
 
 	useEffect(() => {
 		if (!socketQuery) return

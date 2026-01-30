@@ -1,6 +1,6 @@
 {
   "name": "@zhex900/workshop-app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
