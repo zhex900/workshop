@@ -28,6 +28,13 @@ function useRevalidationWSImpl({ watchPaths }: { watchPaths: Array<string> }) {
 	socketUrl.protocol = requestInfo.protocol === 'https:' ? 'wss:' : 'ws:'
 	socketUrl.pathname = '/__ws'
 	socketUrl.search = socketQuery
+	
+	// In Codespaces, the port is embedded in the hostname (e.g., name-5639.app.github.dev)
+	// so we should not set an explicit port, otherwise the connection will fail
+	if (socketUrl.hostname.includes('.app.github.dev')) {
+		socketUrl.port = ''
+	}
+	
 	const socketPath = socketUrl.toString()
 
 	useEffect(() => {
