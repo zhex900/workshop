@@ -59,10 +59,10 @@ import { getConfetti } from './utils/confetti.server'
 import { cn, combineHeaders, getDomainUrl, useAltDown } from './utils/misc'
 import { getPracticePastLessonData } from './utils/practice-past-lesson'
 // import { Presence } from './utils/presence'
+import { type User } from './utils/presence.tsx'
 import { getSentryUser } from './utils/sentry-user'
 import { getSeoMetaTags } from './utils/seo'
 import { getToast } from './utils/toast.server'
-import { User } from './utils/presence.tsx'
 
 export const links: LinksFunction = () => {
 	return [

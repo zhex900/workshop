@@ -87,7 +87,7 @@ app.use((req, res, next) => {
 		// Extract host from origin (remove protocol)
 		const originHost = new URL(origin).host
 		const forwardedHost = req.get('x-forwarded-host')
-		
+
 		// If they don't match, ensure x-forwarded-host matches origin's host
 		if (originHost !== forwardedHost && process.env.CODESPACES) {
 			req.headers['x-forwarded-host'] = originHost
@@ -288,7 +288,11 @@ ${lanUrl ? `${chalk.bold('On Your Network:')}  ${chalk.cyan(lanUrl)}` : ''}
 			console.log('🐨 New WebSocket connection established')
 		})
 		server.on('upgrade', (request, socket, head) => {
-			console.log('🐨 WebSocket connection upgrade requested', request.headers.origin, request.url)
+			console.log(
+				'🐨 WebSocket connection upgrade requested',
+				request.headers.origin,
+				request.url,
+			)
 			const url = new URL(request.url ?? '/', 'ws://localhost:0000')
 			if (url.pathname === '/__ws') {
 				const origin = request.headers.origin
