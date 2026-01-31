@@ -216,7 +216,17 @@ export function getBaseUrl({
 	  }
 )) {
 	const url = new URL(domain)
-	url.port = String(port)
+	
+	// Check if we're in Codespaces by looking for .app.github.dev domain
+	if (url.hostname.includes('.app.github.dev')) {
+		// In Codespaces, replace the port number in the subdomain: name-5639.app.github.dev -> name-4000.app.github.dev
+		url.hostname = url.hostname.replace(/\d+\.app\.github\.dev$/, `${port}.app.github.dev`)
+		url.port = ''
+	} else {
+		// For localhost and other environments, use explicit port
+		url.port = String(port)
+	}
+	
 	return url.toString()
 }
 

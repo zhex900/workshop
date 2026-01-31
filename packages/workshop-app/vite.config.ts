@@ -83,6 +83,16 @@ export default defineConfig((config) => {
 				'@resvg/resvg-js',
 			],
 		},
+		server: {
+			// Configure HMR for Codespaces and other proxied environments
+			hmr: {
+				protocol: 'wss',
+				host: process.env.CODESPACE_NAME
+					? `${process.env.CODESPACE_NAME}-5639.app.github.dev`
+					: 'localhost',
+				port: process.env.CODESPACE_NAME ? 443 : 5639,
+			},
+		},
 		build: {
 			cssMinify: isProduction,
 			sourcemap: true,

@@ -75,6 +75,27 @@ const serverBuildPromise = getBuild()
 
 const app = express()
 
+// Trust proxy headers so X-Forwarded-* headers from reverse proxies (like Codespaces)
+// are properly parsed and matched against the Origin header for CSRF protection
+app.set('trust proxy', true)
+
+// For CSRF checks: ensure x-forwarded-host matches the origin header's host
+// React Router compares these, so we need them aligned in Codespaces
+app.use((req, res, next) => {
+	const origin = req.get('origin')
+	if (origin && req.get('x-forwarded-host')) {
+		// Extract host from origin (remove protocol)
+		const originHost = new URL(origin).host
+		const forwardedHost = req.get('x-forwarded-host')
+		
+		// If they don't match, ensure x-forwarded-host matches origin's host
+		if (originHost !== forwardedHost && process.env.CODESPACES) {
+			req.headers['x-forwarded-host'] = originHost
+		}
+	}
+	next()
+})
+
 app.get(
 	'/.well-known/appspecific/com.chrome.devtools.json',
 	(req: any, res: any) => {
@@ -263,7 +284,11 @@ ${lanUrl ? `${chalk.bold('On Your Network:')}  ${chalk.cyan(lanUrl)}` : ''}
 		>()
 		const wss = new WebSocketServer({ noServer: true })
 
+		server.on('connection', (ws) => {
+			console.log('🐨 New WebSocket connection established')
+		})
 		server.on('upgrade', (request, socket, head) => {
+			console.log('🐨 WebSocket connection upgrade requested', request.headers.origin, request.url)
 			const url = new URL(request.url ?? '/', 'ws://localhost:0000')
 			if (url.pathname === '/__ws') {
 				const origin = request.headers.origin
@@ -344,9 +369,8 @@ ${lanUrl ? `${chalk.bold('On Your Network:')}  ${chalk.cyan(lanUrl)}` : ''}
 						}
 					})
 				})
-			} else {
-				socket.destroy()
 			}
+			// Let other WebSocket upgrades (like Vite HMR) pass through
 		})
 
 		closeWithGrace(async () => {
