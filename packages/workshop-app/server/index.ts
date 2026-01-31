@@ -285,11 +285,6 @@ ${lanUrl ? `${chalk.bold('On Your Network:')}  ${chalk.cyan(lanUrl)}` : ''}
 		const wss = new WebSocketServer({ noServer: true })
 
 		server.on('upgrade', (request, socket, head) => {
-			console.log(
-				'🐨 WebSocket connection upgrade requested',
-				request.headers.origin,
-				request.url,
-			)
 			const url = new URL(request.url ?? '/', 'ws://localhost:0000')
 			if (url.pathname === '/__ws') {
 				const origin = request.headers.origin
