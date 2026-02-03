@@ -1,34 +1,21 @@
-import { type PlaygroundApp } from '@epic-web/workshop-utils/apps.server'
+import { type ProblemApp } from '@epic-web/workshop-utils/apps.server'
 import { Suspense, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import { Await } from 'react-router'
-import { DeferredEpicVideo } from '#app/components/epic-video.tsx'
 import { Icon } from '#app/components/icons'
 import { InBrowserTestRunner } from '#app/components/in-browser-test-runner'
 import { SimpleTooltip } from '#app/components/ui/tooltip.tsx'
 import { TestOutput } from '#app/routes/test'
-import { PlaygroundWindow } from './playground-window'
+import { TestsWindow } from './tests-window'
 
 export function Tests({
-	appInfo: playgroundAppInfo,
-	problemAppName,
-	allApps,
-	isUpToDate,
-	userHasAccessPromise,
+	appInfo: problemAppInfo,
 }: {
-	appInfo: Pick<PlaygroundApp, 'appName' | 'name' | 'test'> | null
-	problemAppName?: string
-	allApps: Array<{ name: string; displayName: string }>
-	isUpToDate: boolean
-	userHasAccessPromise: Promise<boolean>
+	appInfo: Pick<ProblemApp, 'name' | 'test'> | null
 }) {
+	console.log('problemAppInfo', problemAppInfo)
+
 	return (
-		<PlaygroundWindow
-			playgroundAppName={playgroundAppInfo?.appName}
-			problemAppName={problemAppName}
-			allApps={allApps}
-			isUpToDate={isUpToDate}
-		>
+		<TestsWindow>
 			<ErrorBoundary
 				fallbackRender={() => (
 					<div className="w-full p-12">
@@ -50,49 +37,41 @@ export function Tests({
 						</div>
 					}
 				>
-					<Await resolve={userHasAccessPromise}>
-						{(userHasAccess) => (
-							<TestUI
-								playgroundAppInfo={playgroundAppInfo}
-								userHasAccess={userHasAccess}
-							/>
-						)}
-					</Await>
+					<TestUI problemAppInfo={problemAppInfo} />
 				</Suspense>
 			</ErrorBoundary>
-		</PlaygroundWindow>
+		</TestsWindow>
 	)
 }
 
 export function TestUI({
-	userHasAccess,
-	playgroundAppInfo,
+	problemAppInfo,
 }: {
-	playgroundAppInfo: Pick<PlaygroundApp, 'name' | 'test'> | null
-	userHasAccess: boolean
+	problemAppInfo: Pick<ProblemApp, 'name' | 'test'> | null
 }) {
+	console.log('ProblemApp', problemAppInfo)
 	const [inBrowserTestKey, setInBrowserTestKey] = useState(0)
 
-	if (!userHasAccess) {
-		return (
-			<div className="w-full p-12">
-				<div className="flex w-full flex-col gap-4 text-center">
-					<p className="text-2xl font-bold">Access Denied</p>
-					<p className="text-lg">
-						You must login or register for the workshop to view and run the
-						tests.
-					</p>
-				</div>
-				<div className="h-16" />
-				<p className="pb-4">
-					Check out this video to see how the test tab works.
-				</p>
-				<DeferredEpicVideo url="https://www.epicweb.dev/tips/epic-workshop-test-tab-demo" />
-			</div>
-		)
-	}
+	// if (!userHasAccess) {
+	// 	return (
+	// 		<div className="w-full p-12">
+	// 			<div className="flex w-full flex-col gap-4 text-center">
+	// 				<p className="text-2xl font-bold">Access Denied</p>
+	// 				<p className="text-lg">
+	// 					You must login or register for the workshop to view and run the
+	// 					tests.
+	// 				</p>
+	// 			</div>
+	// 			<div className="h-16" />
+	// 			<p className="pb-4">
+	// 				Check out this video to see how the test tab works.
+	// 			</p>
+	// 			<DeferredEpicVideo url="https://www.epicweb.dev/tips/epic-workshop-test-tab-demo" />
+	// 		</div>
+	// 	)
+	// }
 
-	if (!playgroundAppInfo) {
+	if (!problemAppInfo) {
 		return (
 			<div className="flex h-full items-center justify-center text-lg">
 				<p>No tests here 😢 Sorry.</p>
@@ -100,18 +79,19 @@ export function TestUI({
 		)
 	}
 
-	if (playgroundAppInfo.test.type === 'script') {
-		return <TestOutput name={playgroundAppInfo.name} />
+	if (problemAppInfo.test.type === 'script') {
+		return <TestOutput name={problemAppInfo.name} />
 	}
 
-	if (playgroundAppInfo.test.type === 'browser') {
-		const { pathname } = playgroundAppInfo.test
+	if (problemAppInfo.test.type === 'browser') {
+		const { pathname } = problemAppInfo.test
+
 		return (
 			<div
 				className="flex h-full min-h-0 w-full grow flex-col overflow-y-auto"
 				key={inBrowserTestKey}
 			>
-				{playgroundAppInfo.test.testFiles.map((testFile) => (
+				{problemAppInfo.test.testFiles.map((testFile) => (
 					<div key={testFile}>
 						<InBrowserTestRunner pathname={pathname} testFile={testFile} />
 					</div>

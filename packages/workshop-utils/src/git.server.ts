@@ -419,9 +419,13 @@ export async function checkForExerciseChanges() {
 
 	const cwd = getWorkshopRoot()
 	try {
-		const { stdout } = await execaCommand('git status --porcelain exercises/', {
-			cwd,
-		})
+		const { stdout } = await execaCommand(
+			'git status --porcelain exercises/ :(exclude)*.problem.*',
+			{
+				cwd,
+			},
+		)
+		console.log('stdout', cwd, stdout)
 		return stdout.trim().length > 0
 	} catch (error) {
 		console.error(

@@ -153,25 +153,25 @@ export async function action({ request }: ActionFunctionArgs) {
 	const userHasAccess = await userHasAccessToWorkshop({
 		request,
 	})
-	if (!userHasAccess) {
-		return dataWithPE(
-			request,
-			formData,
-			{
-				success: false,
-				error:
-					'You do not have access to this workshop. Login or register for the workshop to be able to run the tests.',
-			},
-			{
-				status: 403,
-				headers: await createToastHeaders({
-					title: 'Access denied',
-					description:
-						'You do not have access to this workshop. Login or register for the workshop to be able to run the tests.',
-				}),
-			},
-		)
-	}
+	// if (!userHasAccess) {
+	// 	return dataWithPE(
+	// 		request,
+	// 		formData,
+	// 		{
+	// 			success: false,
+	// 			error:
+	// 				'You do not have access to this workshop. Login or register for the workshop to be able to run the tests.',
+	// 		},
+	// 		{
+	// 			status: 403,
+	// 			headers: await createToastHeaders({
+	// 				title: 'Access denied',
+	// 				description:
+	// 					'You do not have access to this workshop. Login or register for the workshop to be able to run the tests.',
+	// 			}),
+	// 		},
+	// 	)
+	// }
 	const result = testActionSchema.safeParse({
 		intent: formData.get('intent'),
 		name: formData.get('name'),

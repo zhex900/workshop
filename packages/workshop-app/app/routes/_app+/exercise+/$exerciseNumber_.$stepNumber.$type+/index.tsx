@@ -35,11 +35,8 @@ import {
 	getPreviewSearchParams,
 	PreviewTabsList,
 } from '#app/components/preview-tabs.tsx'
-import { useWorkshopConfig } from '#app/components/workshop-config.tsx'
-// import { fetchDiscordPosts } from '#app/utils/discord.server.ts'
 import { useAltDown } from '#app/utils/misc.tsx'
 import { type Route } from './+types/index.ts'
-import { Playground } from './__shared/playground.tsx'
 import { Preview } from './__shared/preview.tsx'
 import { Tests } from './__shared/tests.tsx'
 import { getAppRunningState, getTestState } from './__shared/utils.tsx'
@@ -207,7 +204,7 @@ export const headers: HeadersFunction = ({ loaderHeaders, parentHeaders }) => {
 }
 
 const tabs = [
-	'playground',
+	// 'playground',
 	'problem',
 	'solution',
 	'tests',
@@ -223,7 +220,7 @@ export default function ExercisePartRoute({
 	const { inBrowserBrowserRef } = useOutletContext<{
 		inBrowserBrowserRef: React.RefObject<InBrowserBrowserRef | null>
 	}>()
-	const workshopConfig = useWorkshopConfig()
+	// const workshopConfig = useWorkshopConfig()
 	const [searchParams] = useSearchParams()
 
 	const preview = searchParams.get('preview')
@@ -250,7 +247,7 @@ export default function ExercisePartRoute({
 				)
 			}
 		}
-		if (tab === 'playground' && ENV.EPICSHOP_DEPLOYED) return true
+		// if (tab === 'playground' && ENV.EPICSHOP_DEPLOYED) return true
 
 		// if (tab === 'chat') {
 		// 	return !workshopConfig.product.discordChannelId
@@ -269,9 +266,13 @@ export default function ExercisePartRoute({
 			if (testExitCode !== null && testExitCode !== 0) return 'failed'
 			return null
 		}
-		if (tab === 'problem' || tab === 'solution' || tab === 'playground') {
-			const appData =
-				tab === 'playground' ? loaderData.playground : loaderData[tab]
+		if (
+			tab === 'problem' ||
+			tab === 'solution'
+			//  || tab === 'playground'
+		) {
+			const appData = loaderData[tab]
+			// tab === 'playground' ? loaderData.playground : loaderData[tab]
 			if (appData?.isRunning) return 'running'
 		}
 		return null
@@ -321,7 +322,7 @@ export default function ExercisePartRoute({
 		>
 			<PreviewTabsList tabs={previewTabs} />
 			<div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden">
-				<Tabs.Content
+				{/* <Tabs.Content
 					value="playground"
 					className="radix-state-inactive:hidden flex min-h-0 w-full grow basis-0 items-stretch justify-center self-start"
 					forceMount
@@ -333,7 +334,7 @@ export default function ExercisePartRoute({
 						allApps={loaderData.allApps}
 						isUpToDate={loaderData.playground?.isUpToDate ?? false}
 					/>
-				</Tabs.Content>
+				</Tabs.Content> */}
 				<Tabs.Content
 					value="problem"
 					className="radix-state-inactive:hidden flex min-h-0 w-full grow basis-0 items-stretch justify-center self-start"
@@ -358,13 +359,7 @@ export default function ExercisePartRoute({
 					value="tests"
 					className="radix-state-inactive:hidden flex min-h-0 w-full grow basis-0 items-stretch justify-center self-start overflow-hidden"
 				>
-					<Tests
-						appInfo={loaderData.playground}
-						problemAppName={loaderData.problem?.name}
-						allApps={loaderData.allApps}
-						isUpToDate={loaderData.playground?.isUpToDate ?? false}
-						userHasAccessPromise={loaderData.userHasAccessPromise}
-					/>
+					<Tests appInfo={loaderData.problem} />
 				</Tabs.Content>
 				<Tabs.Content
 					value="diff"
