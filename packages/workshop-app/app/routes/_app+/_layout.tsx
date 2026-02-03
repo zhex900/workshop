@@ -885,7 +885,7 @@ function MobileNavigation({
 													/>
 													<span>{title}</span>
 												</Link>
-												{showPlayground ? (
+												{/* {showPlayground ? (
 													<Link
 														to={getExerciseStepPath(
 															data.playground.exerciseNumber,
@@ -896,7 +896,7 @@ function MobileNavigation({
 													>
 														🛝
 													</Link>
-												) : null}
+												) : null} */}
 											</span>
 											{isActive ? (
 												<motion.ul
@@ -960,10 +960,10 @@ function MobileNavigation({
 																					}
 																				>
 																					Problem
-																					{problem.name ===
+																					{/* {problem.name ===
 																					data.playground.appName
 																						? ' 🛝'
-																						: ''}
+																						: ''} */}
 																				</NavLink>
 																			)}
 																			{solution && (
@@ -979,10 +979,10 @@ function MobileNavigation({
 																					}
 																				>
 																					Solution
-																					{solution.name ===
+																					{/* {solution.name ===
 																					data.playground.appName
 																						? ' 🛝'
-																						: ''}
+																						: ''} */}
 																				</NavLink>
 																			)}
 																		</div>
@@ -1503,7 +1503,7 @@ function Navigation({
 													/>
 													<span>{title}</span>
 												</Link>
-												{showPlayground ? (
+												{/* {showPlayground ? (
 													<Link
 														to={getExerciseStepPath(
 															data.playground.exerciseNumber,
@@ -1514,7 +1514,7 @@ function Navigation({
 													>
 														🛝
 													</Link>
-												) : null}
+												) : null} */}
 											</span>
 											{isActive ? (
 												<motion.ul
@@ -1578,10 +1578,10 @@ function Navigation({
 																					}
 																				>
 																					Problem
-																					{problem.name ===
+																					{/* {problem.name ===
 																					data.playground.appName
 																						? ' 🛝'
-																						: ''}
+																						: ''} */}
 																				</NavLink>
 																			)}
 																			{solution && (
@@ -1597,10 +1597,10 @@ function Navigation({
 																					}
 																				>
 																					Solution
-																					{solution.name ===
+																					{/* {solution.name ===
 																					data.playground.appName
 																						? ' 🛝'
-																						: ''}
+																						: ''} */}
 																				</NavLink>
 																			)}
 																		</div>

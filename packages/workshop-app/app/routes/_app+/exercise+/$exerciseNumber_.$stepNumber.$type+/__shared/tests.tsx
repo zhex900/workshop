@@ -86,6 +86,8 @@ export function TestUI({
 	if (problemAppInfo.test.type === 'browser') {
 		const { pathname } = problemAppInfo.test
 
+		console.log('problemAppInfo.test.testFiles', problemAppInfo.test)
+
 		return (
 			<div
 				className="flex h-full min-h-0 w-full grow flex-col overflow-y-auto"

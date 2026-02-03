@@ -36,7 +36,7 @@ import { NavChevrons } from '#app/components/nav-chevrons.tsx'
 import { useRevalidationWS } from '#app/components/revalidation-ws.tsx'
 import { EditFileOnGitHub } from '#app/routes/launch-editor.tsx'
 import { ProgressToggle } from '#app/routes/progress.tsx'
-import { SetAppToPlayground } from '#app/routes/set-playground.tsx'
+// import { SetAppToPlayground } from '#app/routes/set-playground.tsx'
 import { getExercisePath } from '#app/utils/misc.tsx'
 import { getRootMatchLoaderData } from '#app/utils/root-loader.ts'
 import { getSeoMetaTags } from '#app/utils/seo.ts'
@@ -346,7 +346,7 @@ export default function ExercisePartRoute({
 									<span>)</span>
 								</Link>
 							</div>
-							{data.problem &&
+							{/* {data.problem &&
 							(data.playground?.appName !== data.problem.name ||
 								!data.playground?.isUpToDate) ? (
 								<SetAppToPlayground
@@ -355,7 +355,7 @@ export default function ExercisePartRoute({
 									hideTextOnNarrow
 									showOnboardingIndicator={showPlaygroundIndicator}
 								/>
-							) : null}
+							) : null} */}
 						</div>
 					</h1>
 					<article

@@ -1718,12 +1718,12 @@ export function getAppDisplayName(a: App, allApps: Array<App>) {
 		const playgroundAppBasis = allApps.find(
 			(otherApp) => a.appName === otherApp.name,
 		)
-		if (playgroundAppBasis) {
-			const basisDisplayName = getAppDisplayName(playgroundAppBasis, allApps)
-			displayName = `🛝 ${basisDisplayName}`
-		} else {
-			displayName = `🛝 ${a.appName}`
-		}
+		// if (playgroundAppBasis) {
+		// 	const basisDisplayName = getAppDisplayName(playgroundAppBasis, allApps)
+		// 	displayName = `🛝 ${basisDisplayName}`
+		// } else {
+		// displayName = `🛝 ${a.appName}`
+		// }
 	} else if (isExtraApp(a)) {
 		displayName = `📚 ${a.title} (extra)`
 	}

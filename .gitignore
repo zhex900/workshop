@@ -34,3 +34,5 @@ vite.config.ts.timestamp-*
 nanobot/*.db
 /other/update-workshops/temp-workshops
 saved-playgrounds
+
+.npmrc
