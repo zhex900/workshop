@@ -342,42 +342,44 @@ export function EditFileOnGitHub({
 			appName: string
 	  }
 )) {
-	const fetcher = useLaunchFetcher()
+	return null
 
-	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-		if (!e.altKey || ENV.EPICSHOP_DEPLOYED) return
-		e.preventDefault()
-		const formData = new FormData()
-		const type = file ? 'file' : 'appFile'
-		formData.append(type, file ?? appFile)
-		formData.append('type', type)
-		if (appName) {
-			formData.append('appName', appName)
-		}
-		void fetcher.submit(formData, { method: 'POST', action: '/launch-editor' })
-	}
+	// const fetcher = useLaunchFetcher()
 
-	const githubPath = ENV.EPICSHOP_GITHUB_ROOT.replace(
-		/\/tree\/|\/blob\//,
-		'/edit/',
-	)
+	// const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+	// 	if (!e.altKey || ENV.EPICSHOP_DEPLOYED) return
+	// 	e.preventDefault()
+	// 	const formData = new FormData()
+	// 	const type = file ? 'file' : 'appFile'
+	// 	formData.append(type, file ?? appFile)
+	// 	formData.append('type', type)
+	// 	if (appName) {
+	// 		formData.append('appName', appName)
+	// 	}
+	// 	void fetcher.submit(formData, { method: 'POST', action: '/launch-editor' })
+	// }
 
-	return (
-		<Link
-			className="self-center font-mono text-sm"
-			onClick={handleClick}
-			target="_blank"
-			to={`${githubPath}/${relativePath}`.replace(/\\/g, '/')}
-		>
-			<span className="@min-[720px]:hidden">Edit</span>
-			<span className="hidden @min-[720px]:block @min-[900px]:hidden">
-				Edit on GitHub
-			</span>
-			<span className="hidden @min-[900px]:block">
-				Edit this page on GitHub
-			</span>
-		</Link>
-	)
+	// const githubPath = ENV.EPICSHOP_GITHUB_ROOT.replace(
+	// 	/\/tree\/|\/blob\//,
+	// 	'/edit/',
+	// )
+
+	// return (
+	// 	<Link
+	// 		className="self-center font-mono text-sm"
+	// 		onClick={handleClick}
+	// 		target="_blank"
+	// 		to={`${githubPath}/${relativePath}`.replace(/\\/g, '/')}
+	// 	>
+	// 		<span className="@min-[720px]:hidden">Edit</span>
+	// 		<span className="hidden @min-[720px]:block @min-[900px]:hidden">
+	// 			Edit on GitHub
+	// 		</span>
+	// 		<span className="hidden @min-[900px]:block">
+	// 			Edit this page on GitHub
+	// 		</span>
+	// 	</Link>
+	// )
 }
 
 export const LaunchEditor = ENV.EPICSHOP_DEPLOYED

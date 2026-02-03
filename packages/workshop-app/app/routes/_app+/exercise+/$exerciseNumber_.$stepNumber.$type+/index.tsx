@@ -230,11 +230,12 @@ export default function ExercisePartRoute({
 
 	function shouldHideTab(tab: (typeof tabs)[number]) {
 		if (tab === 'tests') {
-			return (
-				ENV.EPICSHOP_DEPLOYED ||
-				!loaderData.playground ||
-				loaderData.playground.test.type === 'none'
-			)
+			return false
+			// return (
+			// 	ENV.EPICSHOP_DEPLOYED ||
+			// 	!loaderData.playground ||
+			// 	loaderData.playground.test.type === 'none'
+			// )
 		}
 		if (tab === 'problem' || tab === 'solution') {
 			if (loaderData[tab]?.dev.type === 'none') return true
