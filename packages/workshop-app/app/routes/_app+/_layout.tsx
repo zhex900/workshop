@@ -451,7 +451,7 @@ export default function App() {
 	}
 
 	return (
-		<div className="flex flex-col">
+		<div className="h-screen-safe flex flex-col">
 			{/* {user ? null : <NoUserBanner />} */}
 			{/*
 				this isn't placed in a conditional with isWide because the server render

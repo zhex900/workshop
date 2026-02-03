@@ -46,13 +46,7 @@ export const headers: HeadersFunction = ({ loaderHeaders, parentHeaders }) => {
 }
 
 export default function TestsList() {
-	const { appInfo, userHasAccess } = useLoaderData<typeof loader>()
+	const { appInfo } = useLoaderData<typeof loader>()
 
-	return (
-		<TestUI
-			key={appInfo.name}
-			playgroundAppInfo={appInfo}
-			userHasAccess={userHasAccess}
-		/>
-	)
+	return <TestUI key={appInfo.name} problemAppInfo={appInfo} />
 }

@@ -425,7 +425,6 @@ export async function checkForExerciseChanges() {
 				cwd,
 			},
 		)
-		console.log('stdout', cwd, stdout)
 		return stdout.trim().length > 0
 	} catch (error) {
 		console.error(
